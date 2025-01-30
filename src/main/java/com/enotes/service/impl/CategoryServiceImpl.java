@@ -12,6 +12,7 @@ import org.springframework.util.ObjectUtils;
 import com.enotes.dto.CategoryDto;
 import com.enotes.dto.CategoryResponse;
 import com.enotes.entity.Category;
+import com.enotes.exception.ExistDataException;
 import com.enotes.exception.ResourceNotFoundException;
 import com.enotes.repository.CategoryRepository;
 import com.enotes.service.CategoryService;
@@ -32,7 +33,15 @@ public class CategoryServiceImpl implements CategoryService {
 	@Override
 	public Boolean saveCategory(CategoryDto categoryDto) {
 
+		//validation checking
 		validation.categoryValidation(categoryDto);
+		
+		Boolean existByName = categoryRepo.existsByName(categoryDto.getName().trim());
+		if(existByName) {
+			
+			//throw error
+			throw new ExistDataException("Category already exists!");
+		}
 		
 		Category category = mapper.map(categoryDto, Category.class);
 
