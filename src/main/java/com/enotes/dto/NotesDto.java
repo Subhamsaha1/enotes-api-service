@@ -1,5 +1,6 @@
 package com.enotes.dto;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 
 
@@ -34,7 +35,7 @@ public class NotesDto {
 	
 	private Boolean isDeleted;
 	
-	private Date deletedOn;
+	private LocalDateTime deletedOn;
 	
 	@Getter
 	@Setter
