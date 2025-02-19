@@ -7,6 +7,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.enotes.dto.NotesDto;
 import com.enotes.dto.NotesResponse;
 import com.enotes.entity.FileDetails;
+import com.enotes.exception.ResourceNotFoundException;
 
 public interface NoteService {
 	
@@ -20,5 +21,11 @@ public interface NoteService {
 	public FileDetails getFileDetails(Integer id) throws Exception;
 
 	public NotesResponse getAllNotesByUser(Integer userId, Integer pageNo, Integer pageSize);
+
+	public void softDeleteNotes(Integer id) throws ResourceNotFoundException;
+
+	public void restoreNotes(Integer id) throws ResourceNotFoundException;
+
+	public List<NotesDto> getUserRecycleBinNotes(Integer id);
 
 }
